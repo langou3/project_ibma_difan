@@ -49,7 +49,7 @@ Resources:
   DepartmentsTable:
     Type: AWS::Glue::Table
     Properties:
-      DatabaseName: !Ref AislesDatabase
+      DatabaseName: !Ref MyDatabase
       TableInput:
         Name: departments
         Description: "Table for departments data"
@@ -90,7 +90,7 @@ Resources:
   OrderProductsTable:
     Type: AWS::Glue::Table
     Properties:
-      DatabaseName: !Ref AislesDatabase
+      DatabaseName: !Ref MyDatabase
       TableInput:
         Name: order_products
         Description: "Table for order products data"
@@ -134,7 +134,7 @@ Resources:
   OrdersTable:
     Type: AWS::Glue::Table
     Properties:
-      DatabaseName: !Ref AislesDatabase
+      DatabaseName: !Ref MyDatabase
       TableInput:
         Name: orders
         Description: "Table for order products data"
@@ -184,7 +184,7 @@ Resources:
   ProductsTable:
     Type: AWS::Glue::Table
     Properties:
-      DatabaseName: !Ref AislesDatabase
+      DatabaseName: !Ref MyDatabase
       TableInput:
         Name: products
         Description: "Table for order products data"
