@@ -1,0 +1,226 @@
+Resources:
+  MyDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      DatabaseInput:
+        Name: individual-raw
+        Description: "IMBA raw data"
+
+  AislesTable:
+    Type: AWS::Glue::Table
+    Properties:
+      DatabaseName: !Ref MyDatabase
+      TableInput:
+        Name: aisles
+        Description: "Table for aisles data"
+        StorageDescriptor:
+          Columns:
+            - Name: aisle_id
+              Type: bigint
+            - Name: aisle
+              Type: string
+          Location:   's3://difan-imba/data/aisles/'
+          InputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+          OutputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+          Compressed: false
+          SerdeInfo:
+            SerializationLibrary: "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
+            Parameters:
+              serialization.format: ","
+          Parameters:
+            classification: "csv"
+            delimiter: ","
+            skip.header.line.count: "1"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          CrawlerSchemaDeserializerVersion: "1.0"
+          CrawlerSchemaSerializerVersion: "1.0"
+          UPDATED_BY_CRAWLER: "imba-crawler"
+          areColumnsQuoted: "false"
+          averageRecordSize: "18"
+          columnsOrdered: "true"
+          compressionType: "none"
+          objectCount: "1"
+          recordCount: "144"
+          sizeKey: "2603"
+          typeOfData: "file"
+
+
+  DepartmentsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      DatabaseName: !Ref AislesDatabase
+      TableInput:
+        Name: departments
+        Description: "Table for departments data"
+        StorageDescriptor:
+          Columns:
+            - Name: department_id
+              Type: bigint
+            - Name: department
+              Type: string
+          Location: s3://difan-imba/data/departments/
+          InputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+          OutputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+          Compressed: false
+          NumberOfBuckets: -1
+          SerdeInfo:
+            SerializationLibrary: "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
+            Parameters:
+              serialization.format: ","
+          Parameters:
+            classification: "csv"
+            delimiter: ","
+            skip.header.line.count: "1"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          CrawlerSchemaDeserializerVersion: "1.0"
+          CrawlerSchemaSerializerVersion: "1.0"
+          UPDATED_BY_CRAWLER: "imba-crawler"
+          areColumnsQuoted: "false"
+          averageRecordSize: "13"
+          columnsOrdered: "true"
+          compressionType: "none"
+          objectCount: "1"
+          recordCount: "20"
+          sizeKey: "270"
+          typeOfData: "file"
+
+
+  OrderProductsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      DatabaseName: !Ref AislesDatabase
+      TableInput:
+        Name: order_products
+        Description: "Table for order products data"
+        StorageDescriptor:
+          Columns:
+            - Name: order_id
+              Type: bigint
+            - Name: product_id
+              Type: bigint
+            - Name: add_to_cart_order
+              Type: bigint
+            - Name: reordered
+              Type: bigint
+          Location: s3://difan-imba/data/order_products/
+          InputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+          OutputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+          Compressed: true
+          NumberOfBuckets: -1
+          SerdeInfo:
+            SerializationLibrary: "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
+            Parameters:
+              serialization.format: ","
+          Parameters:
+            classification: "csv"
+            delimiter: ","
+            skip.header.line.count: "1"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          CrawlerSchemaDeserializerVersion: "1.0"
+          CrawlerSchemaSerializerVersion: "1.0"
+          UPDATED_BY_CRAWLER: "imba-crawler"
+          areColumnsQuoted: "false"
+          averageRecordSize: "23"
+          columnsOrdered: "true"
+          compressionType: "gzip"
+          objectCount: "2"
+          recordCount: "6552311"
+          sizeKey: "171830513"
+          typeOfData: "file"
+  
+  OrdersTable:
+    Type: AWS::Glue::Table
+    Properties:
+      DatabaseName: !Ref AislesDatabase
+      TableInput:
+        Name: orders
+        Description: "Table for order products data"
+        StorageDescriptor:
+          Columns:
+            - Name: order_id
+              Type: bigint
+            - Name: user_id
+              Type: bigint
+            - Name: eval_set
+              Type: string
+            - Name: order_number
+              Type: bigint
+            - Name: order_dow
+              Type: bigint
+            - Name: order_hour_of_day
+              Type: bigint
+            - Name: days_since_prior_order
+              Type: double
+          Location: s3://difan-imba/data/orders/
+          InputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+          OutputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+          Compressed: true
+          NumberOfBuckets: -1
+          SerdeInfo:
+            SerializationLibrary: "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
+            Parameters:
+              serialization.format: ","
+          Parameters:
+            classification: "csv"
+            delimiter: ","
+            skip.header.line.count: "1"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          CrawlerSchemaDeserializerVersion: "1.0"
+          CrawlerSchemaSerializerVersion: "1.0"
+          UPDATED_BY_CRAWLER: "imba-crawler"
+          areColumnsQuoted: "false"
+          averageRecordSize: "46"
+          columnsOrdered: "true"
+          compressionType: "none"
+          objectCount: "1"
+          recordCount: "2368883"
+          sizeKey: "108968645"
+          typeOfData: "file"
+
+  ProductsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      DatabaseName: !Ref AislesDatabase
+      TableInput:
+        Name: products
+        Description: "Table for order products data"
+        StorageDescriptor:
+          Columns:
+            - Name: product_id
+              Type: bigint
+            - Name: product_name
+              Type: string
+            - Name: aisle_id
+              Type: bigint
+            - Name: department_id
+              Type: bigint
+          Location: s3://difan-imba/data/products/
+          InputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+          OutputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+          Compressed: true
+          NumberOfBuckets: -1
+          SerdeInfo:
+            SerializationLibrary: "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
+            Parameters:
+              serialization.format: ","
+          Parameters:
+            classification: "csv"
+            delimiter: ","
+            skip.header.line.count: "1"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          CrawlerSchemaDeserializerVersion: "1.0"
+          CrawlerSchemaSerializerVersion: "1.0"
+          UPDATED_BY_CRAWLER: "imba-crawler"
+          areColumnsQuoted: "false"
+          averageRecordSize: "35"
+          columnsOrdered: "true"
+          compressionType: "none"
+          objectCount: "1"
+          recordCount: "62990"
+          sizeKey: "2204659"
+          typeOfData: "file"          
