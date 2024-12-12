@@ -12,6 +12,7 @@ Resources:
     Type: AWS::Glue::Table
     Properties:
       DatabaseName: !Ref MyDatabase
+      CatalogId: !Sub "${AWS::AccountId}"
       TableInput:
         Name: aisles
         Description: "Table for aisles data"
@@ -52,6 +53,7 @@ Resources:
     Type: AWS::Glue::Table
     Properties:
       DatabaseName: !Ref MyDatabase
+      CatalogId: !Sub "${AWS::AccountId}"
       TableInput:
         Name: departments
         Description: "Table for departments data"
@@ -93,6 +95,7 @@ Resources:
     Type: AWS::Glue::Table
     Properties:
       DatabaseName: !Ref MyDatabase
+      CatalogId: !Sub "${AWS::AccountId}"
       TableInput:
         Name: order_products
         Description: "Table for order products data"
@@ -137,6 +140,7 @@ Resources:
     Type: AWS::Glue::Table
     Properties:
       DatabaseName: !Ref MyDatabase
+      CatalogId: !Sub "${AWS::AccountId}"
       TableInput:
         Name: orders
         Description: "Table for order products data"
@@ -187,6 +191,7 @@ Resources:
     Type: AWS::Glue::Table
     Properties:
       DatabaseName: !Ref MyDatabase
+      CatalogId: !Sub "${AWS::AccountId}"
       TableInput:
         Name: products
         Description: "Table for order products data"
