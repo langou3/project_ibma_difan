@@ -29,6 +29,6 @@ jobs:
       - name: Deploy Glue tables CloudFormation Stacks
         run: |
           aws cloudformation deploy \
-            --template-file cfn/glue-tables-template.yaml \
+            --template-file cfn/glue-tables-template.yml \
             --stack-name glue-tables-stack \
             --capabilities CAPABILITY_NAMED_IAM
