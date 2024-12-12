@@ -2,10 +2,10 @@ Resources:
   MyDatabase:
     Type: AWS::Glue::Database
     Properties:
+      CatalogId: !Sub "${AWS::AccountId}" 
       DatabaseInput:
         Name: individual-raw
         Description: "IMBA raw data"
-        CatalogId: !Sub "${AWS::AccountId}" 
 
 
   AislesTable:
