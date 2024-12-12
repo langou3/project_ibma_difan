@@ -5,6 +5,8 @@ Resources:
       DatabaseInput:
         Name: individual-raw
         Description: "IMBA raw data"
+        CatalogId: !Sub "${AWS::AccountId}" 
+
 
   AislesTable:
     Type: AWS::Glue::Table
